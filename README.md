@@ -9,10 +9,12 @@ A gait cycle is the sequence of events that a person's feet go through during wa
 
 ### Technical Highlights
 - Feature extraction and all other frequently-called functions run with constant time complexity
-- The algorithm uses exclusively fixed-point arithmetic 
+- Digital filters are not used, minimizing the latency of phase recognition
 - The algorithm works with 100% accuracy on the two sample data sets, and is able to tolorate slight differences in features 
 - The feature classifier is implemented with a state machine. This makes it easy to organize, add, and modify conditions for each gait cycle phase. It's also easier to incorportate data from additional sensors
+- The algorithm uses exclusively fixed-point arithmetic 
 - The algorithm is encapsulated in the *Gait_cycle_classifier* class, for easy implementation
+- Features that can be extracted from signals include spikes, troughs, and areas of inactivity. The extractor recognizes features in both the signal and its derivative. This functionality is encapsulated in the *feature_extractor* class and can be easily reused in other applications like EMG signal processing
 
 ### Graphical Representation of Output
 
