@@ -26,16 +26,17 @@ This next graph indicates where every phase was detected in the first two full c
 
 ### High Level Algorithm Overview
 Note that main.cpp is used purely for demonstration purposes. The algorithm is encapsulated in the *Gait_cycle_classifier* class.
+
 1. Intake data points in real time
-	* This is done by calling a function and passing the data points as the arguments. Additionally, a struct for gait phase information
-is passed by reference so that the function can return information on the gait cycle phase when a new phase is detected
+  * This is done by calling a function and passing the data points as the arguments. Additionally, a struct for gait phase information is passed by reference so that the function can return information on the gait cycle phase when a new phase is detected
 2. Identify features such as spikes, troughs, and areas of little activity in the data
-	* This capability is encapsulated by a class called Feature_extractor
-3. Every time a new feature is identified, all the recently-identified features are compared against the features required to advance to the
-next state (next gait cycle phase)
-	* This is encapsulated in a class called Gait_cycle_classifier , which contains instances of Feature_extractor (one for each signal)
-	* Gait_cycle_classifier uses a state machine to organize and store the criteria required to advance from one phase to the next
-	* For example, the features required to move from heel strike to foot flat are (1) a positive edge through a high threshold in the
-gyro. Z signal within the last 150ms and (2) a negative edge through a high threshold in the gyro. Z signal within the last 30ms
-	* When the current state advances to the next, the criteria to advance to the next stage is updated by the state machine
+  * This capability is encapsulated by a class called Feature_extractor
+3. Every time a new feature is identified, all the recently-identified features are compared against the features required to advance to the next state (next gait cycle phase)
+  * This is encapsulated in a class called Gait_cycle_classifier , which contains instances of Feature_extractor (one for each signal)
+  * Gait_cycle_classifier uses a state machine to organize and store the criteria required to advance from one phase to the next
+  * For example, the features required to move from heel strike to foot flat are (1) a positive edge through a high threshold in the gyro. Z signal within the last 150ms and (2) a negative edge through a high threshold in the gyro. Z signal within the last 30ms
+  * When the current state advances to the next, the criteria to advance to the next stage is updated by the state machine
 4. When a new phase is detected, the information regarding what phase it is and when it was detected are passed to the caller
+
+### Note
+I used an open source .csv parser in this project (csvparser.cpp, csvparser.h). It can be found here: https://sourceforge.net/projects/cccsvparser/
